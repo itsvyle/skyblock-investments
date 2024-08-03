@@ -254,7 +254,7 @@
             {
               "WFSerializationType": "WFTextTokenString",
               "Value": {
-                "string": "￼% to profit",
+                "string": "￼% to double",
                 "attachmentsByRange": {
                   "{0, 1}": {
                     "Type": "ActionOutput",
