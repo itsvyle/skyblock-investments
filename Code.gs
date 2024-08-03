@@ -13,11 +13,13 @@ const itemsColumnSellVolume = columnToNumber("L")
 const itemsColumnItemID = columnToNumber("B")
 const itemsColumnItemBoughtQTY = columnToNumber("C")
 const itemsColumnItemSoldQTY = columnToNumber("G")
+
 const itemsColumnBuyPrice = columnToNumber("D")
+const itemsColumnSellPrice = columnToNumber("H")
 
 const itemsStartRow = 2
 
-const pricesColumnFirstData = columnToNumber("F")
+const pricesColumnFirstData = columnToNumber("G")
 const pricesOneItemWidth = 4 // col 1: item qty i still have, col 2: item lbin ; col3: item avg; col4: volume
 
 function reloadPrices() {
@@ -67,6 +69,7 @@ function reloadPrices() {
   let totalValueAverage = 0
   let totalValueLBIN = 0
   let totalProfitAverage = 0
+  let totalPotentialProfit = 0
 
 
   for(let item_id in items) {
@@ -94,7 +97,8 @@ function reloadPrices() {
 
     totalValueAverage += item.avg_price * currentQTY
     totalValueLBIN += item.lbin * currentQTY
-    totalProfitAverage += (item.avg_price * currentQTY) - (currentQTY*item.buyPrice)
+    totalProfitAverage += (item.avg_price * currentQTY) - (currentQTY*item.buyPrice) + ((item.sellPrice - item.buyPrice)*item.soldQTY)
+    totalPotentialProfit += (item.avg_price * currentQTY) - (currentQTY*item.buyPrice)
   }
 
   if (new_row[new_row.length-1] === 0) new_row.pop()
@@ -103,6 +107,7 @@ function reloadPrices() {
   new_row[1] = totalValueAverage
   new_row[2] = totalValueLBIN
   new_row[3] = totalProfitAverage
+  new_row[4] = totalPotentialProfit
 
   if (firstRow.length !== maxColumns) {
     priceS.getRange(1,1,1,firstRow.length).setValues([firstRow])
@@ -130,7 +135,7 @@ function listItems() {
   if (maxRow ===  1) {
     throw "Error: couldn't find any items"
   }
-  let range = itemsS.getRange(itemsStartRow,itemsColumnItemID,maxRow,itemsColumnItemSoldQTY-itemsColumnItemID+1)
+  let range = itemsS.getRange(itemsStartRow,itemsColumnItemID,maxRow,itemsColumnSellPrice-itemsColumnItemID+1)
   let values = range.getValues()
   let r = {}
   for (let i = 0;i < maxRow;i++) {
@@ -156,12 +161,19 @@ function listItems() {
     if (isNaN(buyPrice)) continue
     buyPrice = buyPrice * 1e6
 
+    let sellPrice = values[i][itemsColumnSellPrice-itemsColumnItemID]
+    if (sellPrice === undefined || sellPrice === "") sellPrice = 0
+    sellPrice = parseInt(sellPrice)
+    if (isNaN(sellPrice)) continue
+    sellPrice = sellPrice * 1e6
+
     r[item_id] = {
       id: item_id,
       row: itemsStartRow+i,
       boughtQTY,
       soldQTY,
       buyPrice,
+      sellPrice,
       runeID: item_id.startsWith("UNIQUE_RUNE.") ? item_id.split(".")[1] : undefined,
       price_history_col: null
     }
@@ -205,6 +217,19 @@ function getAHInfo(item_id) {
   return {avg: Math.floor(avg/r.length),volume}
 }
 
+/**
+ * Scripts
+ */
+function fetchPricesClick() {
+  let ss = SpreadsheetApp.getActiveSpreadsheet()
+  let itemsS = ss.getSheetByName("items")
+  if (!itemsS) {
+    throw "Error: couldn't find 'items' sheet"
+  }
+  itemsS.activate()
+
+  reloadPrices()
+}
 
 /**
  * Utils
