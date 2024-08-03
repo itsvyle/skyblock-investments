@@ -221,8 +221,12 @@ function getAHInfo(item_id) {
  * Scripts
  */
 function fetchPricesClick() {
-  
-  itemsS.activate()
+  // let ss = SpreadsheetApp.getActiveSpreadsheet()
+  // let itemsS = ss.getSheetByName("items")
+  // if (!itemsS) {
+  //   throw "Error: couldn't find 'items' sheet"
+  // }
+  // itemsS.activate()
 
   reloadPrices()
 }
@@ -282,7 +286,8 @@ function doGet(e) {
     "total_profit": homeS.getRange("b4").getValue(),
     "total_potential_profit": homeS.getRange("b5").getValue(),
     "total_initial_investment": homeS.getRange("b6").getValue(),
-    "cash_out": homeS.getRange("b7").getValue()
+    "cash_out": homeS.getRange("b7").getValue(),
+    "still_invested": homeS.getRange("b8").getValue()
   };
   for(let i in r) {
     r[i] = Math.floor(parseInt(r[i])/1e6)
