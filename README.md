@@ -1,5 +1,8 @@
 # skyblock-investments
 A google apps script to track skyblock investments
+
+Template to copy: https://docs.google.com/spreadsheets/d/11dOQrzW2we7vC8Mp2HzTtlGsxgpWaJkz2pTt9K_-evM/ 
+
 ## Installing
 - Click on `App Scripts` in the extension tab
 ![image](https://github.com/user-attachments/assets/85860f3e-8d00-4715-9c1a-9dd8f3c7cfad)
