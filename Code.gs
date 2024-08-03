@@ -29,10 +29,9 @@ function reloadPrices() {
   let items = listItems()
   for(let item_id in items) {
     let item = items[item_id]
-    if (item.isRune) continue
     let resCell = itemsS.getRange(item.row,itemsColumnAvgPrices)
     try {
-      resCell.setValue(getLowestBin(item_id))
+      resCell.setValue(getLowestBin(item.runeID ?? item_id))
     } catch (err) {
       resCell.setValue(err.toString())
     }
@@ -76,7 +75,7 @@ function listItems() {
       row: itemsStartRow+i,
       boughtQTY,
       soldQTY,
-      isRune: item_id.startsWith("UNIQUE_RUNE.")
+      runeID: item_id.startsWith("UNIQUE_RUNE.") ? item_id.split(".")[1] : undefined
     }
   }
   return r
