@@ -18,3 +18,8 @@ Template to copy: https://docs.google.com/spreadsheets/d/11dOQrzW2we7vC8Mp2HzTtl
 - The item name must be a valid ID; if it is a rune, it should be `UNIQUE_RUNE.<rune ID>.<rune level>` (eg: `UNIQUE_RUNE.RAINY_DAY.3`)
 - Never delete an item - simply change the sold quantity to be the same as buy quantity
 - There can be no duplicate IDs; should you decide to buy more of an item at another price, average the prices out
+
+## Widget
+You can also get an IOS widget to get the data, by deploying the app script, getting the URL and putting it in the [widget](https://github.com/itsvyle/skyblock-investments/blob/main/widget.powerwidget) file, and then using [Powerwidget](https://apps.apple.com/us/app/power-widgets/id1545771094) on your IOS devices
+
+<img src="https://github.com/user-attachments/assets/4fed2695-5871-4471-b462-76013b511122" height="500">
