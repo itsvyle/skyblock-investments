@@ -17,7 +17,7 @@ const itemsColumnItemSoldQTY = columnToNumber("G")
 const itemsStartRow = 2
 
 const pricesColumnFirstData = columnToNumber("E")
-const pricesOneItemWidth = 3 // col 1: item lbin ; col2: item avg; col3: volume
+const pricesOneItemWidth = 4 // col 1: item qty i still have, col 2: item lbin ; col3: item avg; col4: volume
 
 function reloadPrices() {
   let ss = SpreadsheetApp.getActiveSpreadsheet()
@@ -25,8 +25,9 @@ function reloadPrices() {
   if (!itemsS) {
     throw "Error: couldn't find 'items' sheet"
   }
+  let items = listItems()
   // Fill in column in item prices
-  /*let items = listItems()
+  /*
   for(let item_id in items) {
     let item = items[item_id]
     let resCell = itemsS.getRange(item.row,itemsColumnAvgPrices)
@@ -50,7 +51,30 @@ function reloadPrices() {
   let maxColumns = priceS.getDataRange().getNumColumns()
   let firstRow = priceS.getRange(1,1,1,maxColumns).getValues()[0]
   while(firstRow.length<pricesColumnFirstData) firstRow.push("")
-  
+  for(let i=pricesColumnFirstData;i<maxColumns;i+=pricesOneItemWidth) {
+    let item_id = firstRow[i].split(" ")[0]
+    if (item_id in items) {
+      items[item_id].price_history_col = i
+    }
+  }
+  var new_row = new Array(maxColumns)
+  for(let item_id in items) {
+    let item = items[item_id]
+    let i = item.price_history_col
+    if (i === null) {
+      i = new_row.length
+      for(let j = 0;j < pricesOneItemWidth;j++) new_row.push(0)
+      firstRow.push(`${item_id} QTY`)
+      firstRow.push(`${item_id} LBIN`)
+      firstRow.push(`${item_id} AVG`)
+      firstRow.push(`${item_id} VOL`)
+    }
+  }
+
+  new_row[0] = new Date()
+
+  console.log(firstRow)
+  console.log(new_row)
 }
 
 /**
@@ -90,7 +114,8 @@ function listItems() {
       row: itemsStartRow+i,
       boughtQTY,
       soldQTY,
-      runeID: item_id.startsWith("UNIQUE_RUNE.") ? item_id.split(".")[1] : undefined
+      runeID: item_id.startsWith("UNIQUE_RUNE.") ? item_id.split(".")[1] : undefined,
+      price_history_col: null
     }
   }
   return r
