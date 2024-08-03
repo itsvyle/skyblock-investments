@@ -1,5 +1,5 @@
 # skyblock-investments
-A google apps script to track skyblock investments
+A google apps script to track skyblock investments over time dynamically through getting prices from api, etc
 
 Template to copy: https://docs.google.com/spreadsheets/d/11dOQrzW2we7vC8Mp2HzTtlGsxgpWaJkz2pTt9K_-evM/ 
 
