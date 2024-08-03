@@ -69,7 +69,7 @@
         "WFWorkflowActionParameters": {
           "WFItemIndex": {
             "Value": {
-              "string": "5"
+              "string": "8"
             },
             "WFSerializationType": "WFTextTokenString"
           },
