@@ -33,12 +33,17 @@ function reloadPrices() {
     let resCell = itemsS.getRange(item.row,itemsColumnAvgPrices)
     try {
       let price = getAHInfo(item.runeID ? `UNIQUE_RUNE_${item.runeID}` : item_id)
+      item.avg_price = price.avg
+      item.volume = price.volume
+      item.lbin = getLowestBin(item.runeID ?? item_id)
+
       resCell.setValue(Math.floor(price.avg/1000000))
       itemsS.getRange(item.row,itemsColumnSellVolume).setValue(price.volume)
     } catch (err) {
       resCell.setValue(err.toString())
     }
   }
+  console.log(items)
 }
 
 /**
@@ -117,7 +122,7 @@ function getAHInfo(item_id) {
     avg += price_point.avg;
     volume += price_point.volume
   }
-  return {avg: avg/r.length,volume}
+  return {avg: Math.floor(avg/r.length),volume}
 }
 
 
