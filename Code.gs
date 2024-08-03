@@ -25,7 +25,18 @@ function reloadPrices() {
   if (!priceS) {
     throw "Error: couldn't find 'price_history' sheet"
   }
-  listItems()
+
+  let items = listItems()
+  for(let item_id in items) {
+    let item = items[item_id]
+    if (item.isRune) continue
+    let resCell = itemsS.getRange(item.row,itemsColumnAvgPrices)
+    try {
+      resCell.setValue(getLowestBin(item_id))
+    } catch (err) {
+      resCell.setValue(err.toString())
+    }
+  }
 }
 
 /**
@@ -44,6 +55,9 @@ function listItems() {
   let values = range.getValues()
   let r = {}
   for (let i = 0;i < maxRow;i++) {
+    /**
+     * @type {string}
+     */
     let item_id = values[i][0]
     if (!item_id) continue
 
@@ -58,12 +72,14 @@ function listItems() {
     if (isNaN(soldQTY)) continue
 
     r[item_id] = {
+      id: item_id,
       row: itemsStartRow+i,
       boughtQTY,
       soldQTY,
+      isRune: item_id.startsWith("UNIQUE_RUNE.")
     }
   }
-  throw JSON.stringify(r)
+  return r
 }
 
 /**
@@ -74,7 +90,16 @@ const COFL_API_URL = "https://sky.coflnet.com/api/item/price/"
 
 function getLowestBin(item_id) {
   const url = SOOPY_API_URL + `?m=lowestbin${encodeURIComponent(" ")}${encodeURIComponent(item_id)}&u=${encodeURIComponent(API_USERNAME)}`
-  throw url
+  let response = UrlFetchApp.fetch(url);
+  let text = response.getContentText()
+  if (!text.startsWith("Cheapest bin for")) throw ("Response is invalid: " + text)
+  text = text.split(" ")
+  text = text[text.length-1]
+  text = text.substring(0,text.length-1)
+  text = text.split(",").join("")
+  text = parseInt(text)
+  if (isNaN(text)) throw "Couldn't parse lowest bin number"
+  return Math.floor(text/1000000)
 }
 
 
