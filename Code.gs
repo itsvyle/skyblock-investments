@@ -50,7 +50,7 @@ function reloadPrices() {
   }
   let maxColumns = priceS.getDataRange().getNumColumns()
   let firstRow = priceS.getRange(1,1,1,maxColumns).getValues()[0]
-  while(firstRow.length<pricesColumnFirstData) firstRow.push("")
+  while(firstRow.length<pricesColumnFirstData-1) firstRow.push("")
   for(let i=pricesColumnFirstData;i<maxColumns;i+=pricesOneItemWidth) {
     let item_id = firstRow[i].split(" ")[0]
     if (item_id in items) {
@@ -61,7 +61,7 @@ function reloadPrices() {
   for(let item_id in items) {
     let item = items[item_id]
     let i = item.price_history_col
-    if (i === null) {
+    if (!i) {
       i = new_row.length
       for(let j = 0;j < pricesOneItemWidth;j++) new_row.push(0)
       firstRow.push(`${item_id} QTY`)
@@ -69,12 +69,19 @@ function reloadPrices() {
       firstRow.push(`${item_id} AVG`)
       firstRow.push(`${item_id} VOL`)
     }
+    
   }
 
   new_row[0] = new Date()
 
+  if (firstRow.length !== maxColumns) {
+    priceS.getRange(1,1,1,firstRow.length).setValues([firstRow])
+  }
+
   console.log(firstRow)
   console.log(new_row)
+
+  priceS.autoResizeColumns(pricesColumnFirstData,firstRow.length-pricesColumnFirstData)
 }
 
 /**
