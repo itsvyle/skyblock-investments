@@ -1,353 +1,27 @@
 {
-  "family": {
-    "homeScreen": {
-      "size": 0
-    }
-  },
-  "name": "SB Investments",
-  "precompute": {
-    "recommended": {}
-  },
-  "updateFrequency": {
-    "everyHour": {}
-  },
-  "debugMode": false,
-  "flow": {
-    "WFWorkflowClientVersion": "",
-    "WFQuickActionSurfaces": [],
-    "WFWorkflowOutputContentItemClasses": [],
-    "WFWorkflowTypes": [],
-    "WFWorkflowMinimumClientVersion": 0,
-    "WFWorkflowHasShortcutInputVariables": false,
-    "WFWorkflowInputContentItemClasses": [],
-    "WFWorkflowMinimumClientVersionString": "",
-    "WFWorkflowActions": [
-      {
-        "WFWorkflowActionParameters": {
-          "WFHTTPBodyType": "JSON",
-          "UUID": "11DEBAEF-EF13-44BB-AE0D-2E70E4153C4C",
-          "WFHTTPMethod": "GET",
-          "WFURL": {
-            "Value": {
-              "string": "<your url>"
-            },
-            "WFSerializationType": "WFTextTokenString"
-          }
-        },
-        "WFWorkflowActionIdentifier": "is.workflow.actions.downloadurl"
-      },
-      {
-        "WFWorkflowActionIdentifier": "is.workflow.actions.text.split",
-        "WFWorkflowActionParameters": {
-          "UUID": "9D21F4C1-9D59-4AB4-8DB1-FF82099369BF",
-          "WFTextSeparator": "Custom",
-          "WFTextCustomSeparator": {
-            "WFSerializationType": "WFTextTokenString",
-            "Value": {
-              "string": ","
-            }
-          },
-          "text": [
-            {
-              "WFSerializationType": "WFTextTokenString",
-              "Value": {
-                "string": "￼",
-                "attachmentsByRange": {
-                  "{0, 1}": {
-                    "OutputUUID": "11DEBAEF-EF13-44BB-AE0D-2E70E4153C4C",
-                    "OutputName": "FIXME",
-                    "Type": "ActionOutput"
-                  }
-                }
-              }
-            }
-          ]
-        }
-      },
-      {
-        "WFWorkflowActionIdentifier": "is.workflow.actions.getitemfromlist",
-        "WFWorkflowActionParameters": {
-          "WFItemIndex": {
-            "Value": {
-              "string": "8"
-            },
-            "WFSerializationType": "WFTextTokenString"
-          },
-          "WFInput": {
-            "Value": {
-              "Type": "ActionOutput",
-              "OutputName": "FIXME",
-              "OutputUUID": "9D21F4C1-9D59-4AB4-8DB1-FF82099369BF"
-            },
-            "WFSerializationType": "WFTextTokenAttachment"
-          },
-          "UUID": "F8B36EEF-FEF8-49E4-A1ED-932C6D6261F7",
-          "WFItemRangeStart": 1,
-          "WFItemRangeEnd": 2,
-          "WFItemSpecifier": "Item at Index"
-        }
-      },
-      {
-        "WFWorkflowActionParameters": {
-          "WFTextSeparator": "Custom",
-          "UUID": "E674F642-306E-482D-8B2D-F2B146DF4873",
-          "text": [
-            {
-              "WFSerializationType": "WFTextTokenString",
-              "Value": {
-                "string": "In: "
-              }
-            },
-            {
-              "WFSerializationType": "WFTextTokenString",
-              "Value": {
-                "string": "￼",
-                "attachmentsByRange": {
-                  "{0, 1}": {
-                    "OutputUUID": "F8B36EEF-FEF8-49E4-A1ED-932C6D6261F7",
-                    "Type": "ActionOutput",
-                    "OutputName": "FIXME"
-                  }
-                }
-              }
-            },
-            {
-              "WFSerializationType": "WFTextTokenString",
-              "Value": {
-                "string": "m"
-              }
-            }
-          ]
-        },
-        "WFWorkflowActionIdentifier": "is.workflow.actions.text.combine"
-      },
-      {
-        "WFWorkflowActionParameters": {
-          "WFItemIndex": {
-            "WFSerializationType": "WFTextTokenString",
-            "Value": {
-              "string": "1"
-            }
-          },
-          "WFItemRangeStart": 1,
-          "WFItemSpecifier": "Item at Index",
-          "UUID": "0FDD8975-D76D-4E21-AF69-ABFB15FB4C2A",
-          "WFInput": {
-            "Value": {
-              "OutputUUID": "9D21F4C1-9D59-4AB4-8DB1-FF82099369BF",
-              "OutputName": "FIXME",
-              "Type": "ActionOutput"
-            },
-            "WFSerializationType": "WFTextTokenAttachment"
-          },
-          "WFItemRangeEnd": 2
-        },
-        "WFWorkflowActionIdentifier": "is.workflow.actions.getitemfromlist"
-      },
-      {
-        "WFWorkflowActionIdentifier": "is.workflow.actions.text.combine",
-        "WFWorkflowActionParameters": {
-          "text": [
-            {
-              "WFSerializationType": "WFTextTokenString",
-              "Value": {
-                "string": "Now: "
-              }
-            },
-            {
-              "WFSerializationType": "WFTextTokenString",
-              "Value": {
-                "string": "￼",
-                "attachmentsByRange": {
-                  "{0, 1}": {
-                    "OutputName": "FIXME",
-                    "Type": "ActionOutput",
-                    "OutputUUID": "0FDD8975-D76D-4E21-AF69-ABFB15FB4C2A"
-                  }
-                }
-              }
-            },
-            {
-              "WFSerializationType": "WFTextTokenString",
-              "Value": {
-                "string": "m"
-              }
-            }
-          ],
-          "WFTextSeparator": "Custom",
-          "UUID": "46B03B9A-D543-4D0C-B43F-05E727841E9D"
-        }
-      },
-      {
-        "WFWorkflowActionParameters": {
-          "WFItemRangeEnd": 2,
-          "UUID": "7DE7DEDF-B71A-4B11-9FF8-C8D142294006",
-          "WFItemIndex": {
-            "Value": {
-              "string": "4"
-            },
-            "WFSerializationType": "WFTextTokenString"
-          },
-          "WFItemRangeStart": 1,
-          "WFItemSpecifier": "Item at Index",
-          "WFInput": {
-            "WFSerializationType": "WFTextTokenAttachment",
-            "Value": {
-              "OutputName": "FIXME",
-              "OutputUUID": "9D21F4C1-9D59-4AB4-8DB1-FF82099369BF",
-              "Type": "ActionOutput"
-            }
-          }
-        },
-        "WFWorkflowActionIdentifier": "is.workflow.actions.getitemfromlist"
-      },
-      {
-        "WFWorkflowActionParameters": {
-          "text": [
-            {
-              "Value": {
-                "string": "Profit: ￼m",
-                "attachmentsByRange": {
-                  "{8, 1}": {
-                    "OutputName": "FIXME",
-                    "Type": "ActionOutput",
-                    "OutputUUID": "7DE7DEDF-B71A-4B11-9FF8-C8D142294006"
-                  }
-                }
-              },
-              "WFSerializationType": "WFTextTokenString"
-            }
-          ],
-          "UUID": "EA23C1AD-80C4-44C0-A72E-FFC1C2555F55",
-          "WFTextSeparator": "Custom"
-        },
-        "WFWorkflowActionIdentifier": "is.workflow.actions.text.combine"
-      },
-      {
-        "WFWorkflowActionParameters": {
-          "WFItemIndex": {
-            "WFSerializationType": "WFTextTokenString",
-            "Value": {
-              "string": "7"
-            }
-          },
-          "WFItemRangeEnd": 2,
-          "WFItemRangeStart": 1,
-          "WFItemSpecifier": "Item at Index",
-          "UUID": "0F8D7E6C-F53B-4B3A-920E-9E884AFD537B",
-          "WFInput": {
-            "WFSerializationType": "WFTextTokenAttachment",
-            "Value": {
-              "OutputUUID": "9D21F4C1-9D59-4AB4-8DB1-FF82099369BF",
-              "OutputName": "FIXME",
-              "Type": "ActionOutput"
-            }
-          }
-        },
-        "WFWorkflowActionIdentifier": "is.workflow.actions.getitemfromlist"
-      },
-      {
-        "WFWorkflowActionIdentifier": "is.workflow.actions.text.combine",
-        "WFWorkflowActionParameters": {
-          "WFTextSeparator": "New Lines",
-          "text": [
-            {
-              "WFSerializationType": "WFTextTokenString",
-              "Value": {
-                "string": "￼% to double",
-                "attachmentsByRange": {
-                  "{0, 1}": {
-                    "Type": "ActionOutput",
-                    "OutputUUID": "0F8D7E6C-F53B-4B3A-920E-9E884AFD537B",
-                    "OutputName": "FIXME"
-                  }
-                }
-              }
-            }
-          ],
-          "UUID": "51E29316-DE01-462D-8BD2-0C89DA56B43C"
-        }
-      }
-    ],
-    "WFWorkflowIcon": {
-      "WFWorkflowIconStartColor": 0,
-      "WFWorkflowIconGlyphNumber": 0
-    },
-    "WFWorkflowImportQuestions": [],
-    "WFWorkflowHasOutputFallback": false
-  },
   "designs": [
     {
       "design": {
-        "foreground": {
-          "id": "swiftui.tokens.anyshapestyle",
-          "parameters": {
-            "_material": {
-              "id": "swiftui.tokens.material",
-              "parameters": {
-                "_thickness": "Ultra Thin"
-              }
-            },
-            "_color": {
-              "id": "swiftui.tokens.color",
-              "parameters": {
-                "_swatch": "red"
-              }
-            },
-            "_linearGradient": {
-              "id": "swiftui.tokens.gradients.linear",
-              "parameters": {
-                "_stops": {
-                  "id": "swift.native.array",
-                  "elementID": "swiftui.tokens.gradients.stop",
-                  "parameters": {
-                    "value": [
-                      {
-                        "parameters": {
-                          "_color": {
-                            "parameters": {
-                              "_swatch": "red"
-                            },
-                            "id": "swiftui.tokens.color"
-                          },
-                          "_location": 0
-                        },
-                        "id": "swiftui.tokens.gradients.stop"
-                      },
-                      {
-                        "parameters": {
-                          "_color": {
-                            "parameters": {
-                              "_swatch": "purple"
-                            },
-                            "id": "swiftui.tokens.color"
-                          },
-                          "_location": 1
-                        },
-                        "id": "swiftui.tokens.gradients.stop"
-                      }
-                    ]
-                  }
-                }
-              }
-            },
-            "_style": "Color"
-          }
-        },
-        "accentColor": {
-          "parameters": {
-            "_swatch": "orange"
-          },
-          "id": "swiftui.tokens.color"
-        },
         "background": {
           "id": "swiftui.tokens.anyshapestyle",
           "parameters": {
+            "_material": {
+              "parameters": {
+                "_thickness": "Ultra Thin"
+              },
+              "id": "swiftui.tokens.material"
+            },
             "_style": "Color",
+            "_color": {
+              "id": "swiftui.tokens.color",
+              "parameters": {
+                "_swatch": "background"
+              }
+            },
             "_linearGradient": {
-              "id": "swiftui.tokens.gradients.linear",
               "parameters": {
                 "_stops": {
+                  "id": "swift.native.array",
                   "parameters": {
                     "value": [
                       {
@@ -376,42 +50,101 @@
                       }
                     ]
                   },
-                  "id": "swift.native.array",
                   "elementID": "swiftui.tokens.gradients.stop"
                 }
-              }
-            },
-            "_color": {
-              "parameters": {
-                "_swatch": "background"
               },
-              "id": "swiftui.tokens.color"
-            },
+              "id": "swiftui.tokens.gradients.linear"
+            }
+          }
+        },
+        "foreground": {
+          "parameters": {
             "_material": {
               "id": "swiftui.tokens.material",
               "parameters": {
                 "_thickness": "Ultra Thin"
               }
-            }
+            },
+            "_color": {
+              "parameters": {
+                "_swatch": "red"
+              },
+              "id": "swiftui.tokens.color"
+            },
+            "_linearGradient": {
+              "id": "swiftui.tokens.gradients.linear",
+              "parameters": {
+                "_stops": {
+                  "parameters": {
+                    "value": [
+                      {
+                        "id": "swiftui.tokens.gradients.stop",
+                        "parameters": {
+                          "_color": {
+                            "id": "swiftui.tokens.color",
+                            "parameters": {
+                              "_swatch": "red"
+                            }
+                          },
+                          "_location": 0
+                        }
+                      },
+                      {
+                        "id": "swiftui.tokens.gradients.stop",
+                        "parameters": {
+                          "_color": {
+                            "parameters": {
+                              "_swatch": "purple"
+                            },
+                            "id": "swiftui.tokens.color"
+                          },
+                          "_location": 1
+                        }
+                      }
+                    ]
+                  },
+                  "id": "swift.native.array",
+                  "elementID": "swiftui.tokens.gradients.stop"
+                }
+              }
+            },
+            "_style": "Color"
+          },
+          "id": "swiftui.tokens.anyshapestyle"
+        },
+        "accentColor": {
+          "id": "swiftui.tokens.color",
+          "parameters": {
+            "_swatch": "orange"
           }
         },
         "layers": [
           {
             "isHidden": false,
-            "id": "0AE4C00F-A716-4520-AC03-BFD6D7A5206F",
             "elements": [
               {
-                "id": "874A8656-C672-4A59-BA2C-39D68A144994",
                 "content": {
-                  "id": "swiftui.views.text",
                   "parameters": {
                     "_content": {
                       "Value": {
-                        "OutputUUID": "E674F642-306E-482D-8B2D-F2B146DF4873",
                         "OutputName": "FIXME",
+                        "OutputUUID": "E674F642-306E-482D-8B2D-F2B146DF4873",
                         "Type": "ActionOutput"
                       },
                       "WFSerializationType": "WFTextTokenAttachment"
+                    },
+                    "_multilineTextAlignment": "center",
+                    "_style": {
+                      "parameters": {
+                        "_color": {
+                          "id": "swiftui.tokens.color",
+                          "parameters": {
+                            "_swatch": "green"
+                          }
+                        },
+                        "_style": "Color"
+                      },
+                      "id": "swiftui.tokens.anyshapestyle"
                     },
                     "_font": {
                       "id": "swiftui.tokens.font",
@@ -421,41 +154,72 @@
                         "_fontFace": "Sans",
                         "_style": "Body"
                       }
-                    },
-                    "_multilineTextAlignment": "center",
+                    }
+                  },
+                  "id": "swiftui.views.text"
+                },
+                "frame": {
+                  "y": 1,
+                  "width": 7,
+                  "height": 1,
+                  "x": 0
+                },
+                "id": "874A8656-C672-4A59-BA2C-39D68A144994"
+              },
+              {
+                "frame": {
+                  "x": 0,
+                  "y": 2,
+                  "width": 7,
+                  "height": 1
+                },
+                "content": {
+                  "id": "swiftui.views.text",
+                  "parameters": {
                     "_style": {
                       "parameters": {
                         "_style": "Color",
                         "_color": {
                           "id": "swiftui.tokens.color",
                           "parameters": {
-                            "_swatch": "green"
+                            "_swatch": "orange"
                           }
                         }
                       },
                       "id": "swiftui.tokens.anyshapestyle"
-                    }
-                  }
-                },
-                "frame": {
-                  "width": 7,
-                  "x": 0,
-                  "height": 1,
-                  "y": 1
-                }
-              },
-              {
-                "id": "9F608DC0-408F-4876-B7F5-164E44A609C4",
-                "content": {
-                  "parameters": {
+                    },
                     "_content": {
+                      "WFSerializationType": "WFTextTokenAttachment",
                       "Value": {
                         "OutputName": "FIXME",
                         "OutputUUID": "46B03B9A-D543-4D0C-B43F-05E727841E9D",
                         "Type": "ActionOutput"
-                      },
-                      "WFSerializationType": "WFTextTokenAttachment"
+                      }
                     },
+                    "_multilineTextAlignment": "center",
+                    "_font": {
+                      "parameters": {
+                        "_size": 17,
+                        "_style": "Body",
+                        "_weight": "regular",
+                        "_fontFace": "Sans"
+                      },
+                      "id": "swiftui.tokens.font"
+                    }
+                  }
+                },
+                "id": "9F608DC0-408F-4876-B7F5-164E44A609C4"
+              },
+              {
+                "frame": {
+                  "y": 3,
+                  "height": 1,
+                  "x": 0,
+                  "width": 7
+                },
+                "content": {
+                  "parameters": {
+                    "_multilineTextAlignment": "center",
                     "_font": {
                       "parameters": {
                         "_size": 17,
@@ -465,43 +229,8 @@
                       },
                       "id": "swiftui.tokens.font"
                     },
-                    "_multilineTextAlignment": "center",
                     "_style": {
                       "id": "swiftui.tokens.anyshapestyle",
-                      "parameters": {
-                        "_style": "Color",
-                        "_color": {
-                          "id": "swiftui.tokens.color",
-                          "parameters": {
-                            "_swatch": "orange"
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "id": "swiftui.views.text"
-                },
-                "frame": {
-                  "y": 2,
-                  "width": 7,
-                  "x": 0,
-                  "height": 1
-                }
-              },
-              {
-                "id": "0E3467DE-9A08-4AB9-A0D6-09C7A76E9606",
-                "content": {
-                  "id": "swiftui.views.text",
-                  "parameters": {
-                    "_content": {
-                      "WFSerializationType": "WFTextTokenAttachment",
-                      "Value": {
-                        "Type": "ActionOutput",
-                        "OutputName": "FIXME",
-                        "OutputUUID": "EA23C1AD-80C4-44C0-A72E-FFC1C2555F55"
-                      }
-                    },
-                    "_style": {
                       "parameters": {
                         "_style": "Color",
                         "_color": {
@@ -510,76 +239,347 @@
                           },
                           "id": "swiftui.tokens.color"
                         }
-                      },
-                      "id": "swiftui.tokens.anyshapestyle"
-                    },
-                    "_multilineTextAlignment": "center",
-                    "_font": {
-                      "id": "swiftui.tokens.font",
-                      "parameters": {
-                        "_fontFace": "Sans",
-                        "_weight": "regular",
-                        "_size": 17,
-                        "_style": "Body"
                       }
+                    },
+                    "_content": {
+                      "Value": {
+                        "OutputName": "FIXME",
+                        "Type": "ActionOutput",
+                        "OutputUUID": "EA23C1AD-80C4-44C0-A72E-FFC1C2555F55"
+                      },
+                      "WFSerializationType": "WFTextTokenAttachment"
                     }
-                  }
+                  },
+                  "id": "swiftui.views.text"
                 },
-                "frame": {
-                  "width": 7,
-                  "y": 3,
-                  "x": 0,
-                  "height": 1
-                }
+                "id": "0E3467DE-9A08-4AB9-A0D6-09C7A76E9606"
               },
               {
                 "id": "E4C7B242-5665-4081-B02D-C6E3213A97FA",
                 "frame": {
                   "width": 5,
-                  "y": 4,
                   "height": 3,
+                  "y": 4,
                   "x": 1
                 },
                 "content": {
+                  "id": "swiftui.views.text",
                   "parameters": {
-                    "_font": {
-                      "id": "swiftui.tokens.font",
-                      "parameters": {
-                        "_style": "Body",
-                        "_fontFace": "Mono",
-                        "_weight": "regular",
-                        "_size": 17
-                      }
-                    },
-                    "_multilineTextAlignment": "center",
-                    "_style": {
-                      "id": "swiftui.tokens.anyshapestyle",
-                      "parameters": {
-                        "_style": "Color"
-                      }
-                    },
                     "_content": {
                       "WFSerializationType": "WFTextTokenAttachment",
                       "Value": {
                         "Type": "ActionOutput",
-                        "OutputName": "FIXME",
-                        "OutputUUID": "51E29316-DE01-462D-8BD2-0C89DA56B43C"
+                        "OutputUUID": "51E29316-DE01-462D-8BD2-0C89DA56B43C",
+                        "OutputName": "FIXME"
                       }
-                    }
-                  },
-                  "id": "swiftui.views.text"
+                    },
+                    "_style": {
+                      "parameters": {
+                        "_style": "Color"
+                      },
+                      "id": "swiftui.tokens.anyshapestyle"
+                    },
+                    "_font": {
+                      "id": "swiftui.tokens.font",
+                      "parameters": {
+                        "_size": 17,
+                        "_style": "Body",
+                        "_fontFace": "Mono",
+                        "_weight": "regular"
+                      }
+                    },
+                    "_multilineTextAlignment": "center"
+                  }
                 }
               }
-            ]
+            ],
+            "id": "0AE4C00F-A716-4520-AC03-BFD6D7A5206F"
           },
           {
+            "isHidden": false,
             "elements": [],
-            "id": "8C51683F-EF46-43F2-8B95-99FAB016F204",
-            "isHidden": false
+            "id": "8C51683F-EF46-43F2-8B95-99FAB016F204"
           }
         ]
       },
       "id": "D226B853-C86B-4CBA-B90F-12D32E0B1526"
     }
-  ]
+  ],
+  "name": "SB Investments",
+  "precompute": {
+    "recommended": {}
+  },
+  "debugMode": false,
+  "flow": {
+    "WFWorkflowIcon": {
+      "WFWorkflowIconStartColor": 0,
+      "WFWorkflowIconGlyphNumber": 0
+    },
+    "WFWorkflowTypes": [],
+    "WFWorkflowOutputContentItemClasses": [],
+    "WFWorkflowMinimumClientVersionString": "",
+    "WFWorkflowActions": [
+      {
+        "WFWorkflowActionIdentifier": "is.workflow.actions.downloadurl",
+        "WFWorkflowActionParameters": {
+          "WFHTTPBodyType": "JSON",
+          "WFHTTPMethod": "GET",
+          "UUID": "11DEBAEF-EF13-44BB-AE0D-2E70E4153C4C",
+          "WFURL": {
+            "Value": {
+              "string": "https://script.google.com/macros/s/<your id>/exec"
+            },
+            "WFSerializationType": "WFTextTokenString"
+          }
+        }
+      },
+      {
+        "WFWorkflowActionParameters": {
+          "text": [
+            {
+              "WFSerializationType": "WFTextTokenString",
+              "Value": {
+                "attachmentsByRange": {
+                  "{0, 1}": {
+                    "Type": "ActionOutput",
+                    "OutputUUID": "11DEBAEF-EF13-44BB-AE0D-2E70E4153C4C",
+                    "OutputName": "FIXME"
+                  }
+                },
+                "string": "￼"
+              }
+            }
+          ],
+          "WFTextCustomSeparator": {
+            "Value": {
+              "string": ","
+            },
+            "WFSerializationType": "WFTextTokenString"
+          },
+          "WFTextSeparator": "Custom",
+          "UUID": "9D21F4C1-9D59-4AB4-8DB1-FF82099369BF"
+        },
+        "WFWorkflowActionIdentifier": "is.workflow.actions.text.split"
+      },
+      {
+        "WFWorkflowActionIdentifier": "is.workflow.actions.getitemfromlist",
+        "WFWorkflowActionParameters": {
+          "WFItemRangeStart": 1,
+          "WFInput": {
+            "WFSerializationType": "WFTextTokenAttachment",
+            "Value": {
+              "Type": "ActionOutput",
+              "OutputUUID": "9D21F4C1-9D59-4AB4-8DB1-FF82099369BF",
+              "OutputName": "FIXME"
+            }
+          },
+          "WFItemIndex": {
+            "Value": {
+              "string": "7"
+            },
+            "WFSerializationType": "WFTextTokenString"
+          },
+          "WFItemSpecifier": "Item at Index",
+          "WFItemRangeEnd": 2,
+          "UUID": "F8B36EEF-FEF8-49E4-A1ED-932C6D6261F7"
+        }
+      },
+      {
+        "WFWorkflowActionParameters": {
+          "text": [
+            {
+              "Value": {
+                "string": "In: "
+              },
+              "WFSerializationType": "WFTextTokenString"
+            },
+            {
+              "Value": {
+                "attachmentsByRange": {
+                  "{0, 1}": {
+                    "OutputName": "FIXME",
+                    "Type": "ActionOutput",
+                    "OutputUUID": "F8B36EEF-FEF8-49E4-A1ED-932C6D6261F7"
+                  }
+                },
+                "string": "￼"
+              },
+              "WFSerializationType": "WFTextTokenString"
+            },
+            {
+              "Value": {
+                "string": "m"
+              },
+              "WFSerializationType": "WFTextTokenString"
+            }
+          ],
+          "UUID": "E674F642-306E-482D-8B2D-F2B146DF4873",
+          "WFTextSeparator": "Custom"
+        },
+        "WFWorkflowActionIdentifier": "is.workflow.actions.text.combine"
+      },
+      {
+        "WFWorkflowActionIdentifier": "is.workflow.actions.getitemfromlist",
+        "WFWorkflowActionParameters": {
+          "WFItemRangeEnd": 2,
+          "WFItemRangeStart": 1,
+          "WFInput": {
+            "WFSerializationType": "WFTextTokenAttachment",
+            "Value": {
+              "Type": "ActionOutput",
+              "OutputName": "FIXME",
+              "OutputUUID": "9D21F4C1-9D59-4AB4-8DB1-FF82099369BF"
+            }
+          },
+          "WFItemSpecifier": "Item at Index",
+          "UUID": "0FDD8975-D76D-4E21-AF69-ABFB15FB4C2A",
+          "WFItemIndex": {
+            "Value": {
+              "string": "1"
+            },
+            "WFSerializationType": "WFTextTokenString"
+          }
+        }
+      },
+      {
+        "WFWorkflowActionParameters": {
+          "text": [
+            {
+              "Value": {
+                "string": "Now: "
+              },
+              "WFSerializationType": "WFTextTokenString"
+            },
+            {
+              "WFSerializationType": "WFTextTokenString",
+              "Value": {
+                "string": "￼",
+                "attachmentsByRange": {
+                  "{0, 1}": {
+                    "OutputName": "FIXME",
+                    "OutputUUID": "0FDD8975-D76D-4E21-AF69-ABFB15FB4C2A",
+                    "Type": "ActionOutput"
+                  }
+                }
+              }
+            },
+            {
+              "WFSerializationType": "WFTextTokenString",
+              "Value": {
+                "string": "m"
+              }
+            }
+          ],
+          "UUID": "46B03B9A-D543-4D0C-B43F-05E727841E9D",
+          "WFTextSeparator": "Custom"
+        },
+        "WFWorkflowActionIdentifier": "is.workflow.actions.text.combine"
+      },
+      {
+        "WFWorkflowActionParameters": {
+          "WFItemSpecifier": "Item at Index",
+          "WFInput": {
+            "WFSerializationType": "WFTextTokenAttachment",
+            "Value": {
+              "OutputName": "FIXME",
+              "Type": "ActionOutput",
+              "OutputUUID": "9D21F4C1-9D59-4AB4-8DB1-FF82099369BF"
+            }
+          },
+          "WFItemRangeEnd": 2,
+          "WFItemRangeStart": 1,
+          "WFItemIndex": {
+            "Value": {
+              "string": "4"
+            },
+            "WFSerializationType": "WFTextTokenString"
+          },
+          "UUID": "7DE7DEDF-B71A-4B11-9FF8-C8D142294006"
+        },
+        "WFWorkflowActionIdentifier": "is.workflow.actions.getitemfromlist"
+      },
+      {
+        "WFWorkflowActionParameters": {
+          "WFTextSeparator": "Custom",
+          "text": [
+            {
+              "WFSerializationType": "WFTextTokenString",
+              "Value": {
+                "attachmentsByRange": {
+                  "{8, 1}": {
+                    "OutputUUID": "7DE7DEDF-B71A-4B11-9FF8-C8D142294006",
+                    "OutputName": "FIXME",
+                    "Type": "ActionOutput"
+                  }
+                },
+                "string": "Profit: ￼m"
+              }
+            }
+          ],
+          "UUID": "EA23C1AD-80C4-44C0-A72E-FFC1C2555F55"
+        },
+        "WFWorkflowActionIdentifier": "is.workflow.actions.text.combine"
+      },
+      {
+        "WFWorkflowActionIdentifier": "is.workflow.actions.getitemfromlist",
+        "WFWorkflowActionParameters": {
+          "WFItemRangeStart": 1,
+          "WFInput": {
+            "WFSerializationType": "WFTextTokenAttachment",
+            "Value": {
+              "OutputName": "FIXME",
+              "OutputUUID": "9D21F4C1-9D59-4AB4-8DB1-FF82099369BF",
+              "Type": "ActionOutput"
+            }
+          },
+          "WFItemRangeEnd": 2,
+          "UUID": "0F8D7E6C-F53B-4B3A-920E-9E884AFD537B",
+          "WFItemIndex": {
+            "Value": {
+              "string": "8"
+            },
+            "WFSerializationType": "WFTextTokenString"
+          },
+          "WFItemSpecifier": "Item at Index"
+        }
+      },
+      {
+        "WFWorkflowActionParameters": {
+          "WFTextSeparator": "New Lines",
+          "UUID": "51E29316-DE01-462D-8BD2-0C89DA56B43C",
+          "text": [
+            {
+              "Value": {
+                "string": "￼% to double",
+                "attachmentsByRange": {
+                  "{0, 1}": {
+                    "OutputUUID": "0F8D7E6C-F53B-4B3A-920E-9E884AFD537B",
+                    "OutputName": "FIXME",
+                    "Type": "ActionOutput"
+                  }
+                }
+              },
+              "WFSerializationType": "WFTextTokenString"
+            }
+          ]
+        },
+        "WFWorkflowActionIdentifier": "is.workflow.actions.text.combine"
+      }
+    ],
+    "WFWorkflowMinimumClientVersion": 0,
+    "WFQuickActionSurfaces": [],
+    "WFWorkflowHasShortcutInputVariables": false,
+    "WFWorkflowInputContentItemClasses": [],
+    "WFWorkflowClientVersion": "",
+    "WFWorkflowHasOutputFallback": false,
+    "WFWorkflowImportQuestions": []
+  },
+  "family": {
+    "homeScreen": {
+      "size": 0
+    }
+  },
+  "updateFrequency": {
+    "everyThirtyMinutes": {}
+  }
 }
