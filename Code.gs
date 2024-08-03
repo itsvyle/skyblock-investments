@@ -31,7 +31,7 @@ function reloadPrices() {
     let item = items[item_id]
     let resCell = itemsS.getRange(item.row,itemsColumnAvgPrices)
     try {
-      resCell.setValue(getLowestBin(item.runeID ?? item_id))
+      resCell.setValue(getAveragePrice(item.runeID ? `UNIQUE_RUNE_${item.runeID}` : item_id))
     } catch (err) {
       resCell.setValue(err.toString())
     }
@@ -39,7 +39,7 @@ function reloadPrices() {
 }
 
 /**
- * @returns {Object} - a map with the key being items and the value being the amount of said items
+ * @returns {Object} - a map with the key being items and the value being data about the item
  */
 function listItems() {
   let itemsS = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("items")
@@ -99,6 +99,16 @@ function getLowestBin(item_id) {
   text = parseInt(text)
   if (isNaN(text)) throw "Couldn't parse lowest bin number"
   return Math.floor(text/1000000)
+}
+
+function getAveragePrice(item_id) {
+  const url = COFL_API_URL + `${encodeURIComponent(item_id)}/history/day`
+  let response = UrlFetchApp.fetch(url);
+  let r = JSON.stringify(response.getContentText());
+  if (!r) throw "Couldn't parse average price"
+  if (r.slug) throw `${item_id}: ${r.message}`
+  if (!Array.isArray(r)) throw "COFL reply isn't an array"
+  return r[r.length-1].avg
 }
 
 
