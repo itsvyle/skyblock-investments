@@ -281,12 +281,39 @@ function doGet(e) {
     "total_value_lbin": homeS.getRange("b3").getValue(),
     "total_profit": homeS.getRange("b4").getValue(),
     "total_potential_profit": homeS.getRange("b5").getValue(),
-    "total_initial_investment": homeS.getRange("b6").getValue()
+    "total_initial_investment": homeS.getRange("b6").getValue(),
+    "cash_out": homeS.getRange("b7").getValue()
   };
-
   for(let i in r) {
     r[i] = Math.floor(parseInt(r[i])/1e6)
   }
-  console.log(r)
-  return ContentService.createTextOutput(JSON.stringify(r,null,2)).setMimeType(ContentService.MimeType.JSON)
+  r.percentage_made_back = Math.floor((r.total_profit/r.total_initial_investment)*100)
+
+  
+  
+  if (e.parameter.json) {
+    return ContentService.createTextOutput(JSON.stringify(r,null,2)).setMimeType(ContentService.MimeType.JSON)
+  } else {
+    let s = Object.values(r).join(",");
+    return ContentService.createTextOutput(s).setMimeType(ContentService.MimeType.TEXT)
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
