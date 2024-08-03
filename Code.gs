@@ -8,6 +8,7 @@ function onOpen(e) {
 const API_USERNAME = "Refraction"
 
 const itemsColumnAvgPrices = letterToNumber("K")
+const itemsColumnSellVolume = letterToNumber("AA")
 
 const itemsColumnItemID = letterToNumber("B")
 const itemsColumnItemBoughtQTY = letterToNumber("C")
@@ -33,6 +34,7 @@ function reloadPrices() {
     try {
       let price = getAHInfo(item.runeID ? `UNIQUE_RUNE_${item.runeID}` : item_id)
       resCell.setValue(Math.floor(price.avg/1000000))
+      itemsS.getRange(item.row,itemsColumnSellVolume).setValue(price.volume)
     } catch (err) {
       resCell.setValue(err.toString())
     }
@@ -131,7 +133,7 @@ function letterToNumber(letter) {
   for(let i = 0;i < letter.length;i++) {
     let code = letter.charCodeAt(i);
     if (code<97 || code > 122) continue
-    c += (code-97)
+    c += i*26 + (code-97)
   }
   return c + 1 // columns start at 1
 }
