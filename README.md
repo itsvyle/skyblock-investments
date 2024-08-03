@@ -8,3 +8,8 @@ A google apps script to track skyblock investments
 - Going back to the sheet, reload the page, and run the script by going to extensions. Give all asked authorizations - this will only apply to your account and this script, this is not granting me any access
 ![image](https://github.com/user-attachments/assets/3ba56df3-1f20-4b8d-bd50-a0e8368130a6)
 - Simply run the script! You can also set it up so it runs periodically
+
+## Usage guidelines
+- The item name must be a valid ID; if it is a rune, it should be `UNIQUE_RUNE.<rune ID>.<rune level>` (eg: `UNIQUE_RUNE.RAINY_DAY.3`)
+- Never delete an item - simply change the sold quantity to be the same as buy quantity
+- 
