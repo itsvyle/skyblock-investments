@@ -17,4 +17,4 @@ Template to copy: https://docs.google.com/spreadsheets/d/11dOQrzW2we7vC8Mp2HzTtl
 - Fill in your items in the `items` sheet
 - The item name must be a valid ID; if it is a rune, it should be `UNIQUE_RUNE.<rune ID>.<rune level>` (eg: `UNIQUE_RUNE.RAINY_DAY.3`)
 - Never delete an item - simply change the sold quantity to be the same as buy quantity
-- 
+- There can be no duplicate IDs; should you decide to buy more of an item at another price, average the prices out
