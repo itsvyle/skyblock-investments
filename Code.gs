@@ -221,11 +221,7 @@ function getAHInfo(item_id) {
  * Scripts
  */
 function fetchPricesClick() {
-  let ss = SpreadsheetApp.getActiveSpreadsheet()
-  let itemsS = ss.getSheetByName("items")
-  if (!itemsS) {
-    throw "Error: couldn't find 'items' sheet"
-  }
+  
   itemsS.activate()
 
   reloadPrices()
@@ -260,4 +256,37 @@ function numberToColumn(index) {
   }
 
   return column;
+}
+
+/**
+ * Web Stuff
+ */
+function doGet(e) {
+  let ss = SpreadsheetApp.getActiveSpreadsheet()
+  let itemsS = ss.getSheetByName("items")
+  if (!itemsS) {
+    throw "Error: couldn't find 'items' sheet"
+  }
+  let priceS = ss.getSheetByName("price_history")
+  if (!priceS) {
+    throw "Error: couldn't find 'price_history' sheet"
+  }
+  let homeS = ss.getSheetByName("home")
+  if (!homeS) {
+    throw "Error: couldn't find 'home' sheet"
+  }
+  
+  let r = {
+    "total_value_avg": homeS.getRange("b2").getValue(),
+    "total_value_lbin": homeS.getRange("b3").getValue(),
+    "total_profit": homeS.getRange("b4").getValue(),
+    "total_potential_profit": homeS.getRange("b5").getValue(),
+    "total_initial_investment": homeS.getRange("b6").getValue()
+  };
+
+  for(let i in r) {
+    r[i] = Math.floor(parseInt(r[i])/1e6)
+  }
+  console.log(r)
+  return ContentService.createTextOutput(JSON.stringify(r,null,2)).setMimeType(ContentService.MimeType.JSON)
 }
