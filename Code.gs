@@ -16,18 +16,17 @@ const itemsColumnItemSoldQTY = columnToNumber("G")
 
 const itemsStartRow = 2
 
+const pricesColumnFirstData = columnToNumber("E")
+const pricesOneItemWidth = 3 // col 1: item lbin ; col2: item avg; col3: volume
+
 function reloadPrices() {
   let ss = SpreadsheetApp.getActiveSpreadsheet()
   let itemsS = ss.getSheetByName("items")
   if (!itemsS) {
     throw "Error: couldn't find 'items' sheet"
   }
-  let priceS = ss.getSheetByName("price_history")
-  if (!priceS) {
-    throw "Error: couldn't find 'price_history' sheet"
-  }
-
-  let items = listItems()
+  // Fill in column in item prices
+  /*let items = listItems()
   for(let item_id in items) {
     let item = items[item_id]
     let resCell = itemsS.getRange(item.row,itemsColumnAvgPrices)
@@ -42,8 +41,16 @@ function reloadPrices() {
     } catch (err) {
       resCell.setValue(err.toString())
     }
+  }*/
+  
+  let priceS = ss.getSheetByName("price_history")
+  if (!priceS) {
+    throw "Error: couldn't find 'price_history' sheet"
   }
-  console.log(items)
+  let maxColumns = priceS.getDataRange().getNumColumns()
+  let firstRow = priceS.getRange(1,1,1,maxColumns).getValues()[0]
+  while(firstRow.length<pricesColumnFirstData) firstRow.push("")
+  
 }
 
 /**
