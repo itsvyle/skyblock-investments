@@ -7,12 +7,12 @@ function onOpen(e) {
 
 const API_USERNAME = "Refraction"
 
-const itemsColumnAvgPrices = letterToNumber("K")
-const itemsColumnSellVolume = letterToNumber("AA")
+const itemsColumnAvgPrices = columnToNumber("K")
+const itemsColumnSellVolume = columnToNumber("L")
 
-const itemsColumnItemID = letterToNumber("B")
-const itemsColumnItemBoughtQTY = letterToNumber("C")
-const itemsColumnItemSoldQTY = letterToNumber("G")
+const itemsColumnItemID = columnToNumber("B")
+const itemsColumnItemBoughtQTY = columnToNumber("C")
+const itemsColumnItemSoldQTY = columnToNumber("G")
 
 const itemsStartRow = 2
 
@@ -125,15 +125,17 @@ function getAHInfo(item_id) {
  * Utils
  */
 /**
- * @param {string} letter
+ * @param {string} column
  */
-function letterToNumber(letter) {
-  letter = letter.toLowerCase()
-  let c = 0
-  for(let i = 0;i < letter.length;i++) {
-    let code = letter.charCodeAt(i);
+function columnToNumber(column) {
+  column = column.toLowerCase()
+  let index = 0;
+
+  for (let i = 0; i < column.length; i++) {
+    let code = column.charCodeAt(i);
     if (code<97 || code > 122) continue
-    c += i*26 + (code-97)
+    index = index * 26 + (code-97) + 1;
   }
-  return c + 1 // columns start at 1
+
+  return index
 }
