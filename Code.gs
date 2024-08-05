@@ -249,7 +249,7 @@ function createPriceChartForHoveredItem() {
         labelInLegend: "volume",
         areaOpacity: 0.5,
         targetAxisIndex: 1,
-        color: "#008ecb",
+        color: "#b9ff8a",
         dataOpacity: 0.1,
         opacity: 0.1
       },
