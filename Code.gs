@@ -220,7 +220,11 @@ function createPriceChartForHoveredItem() {
     throw "Couldn't find item with name " + item_name;
   }
   
-  let firstItemRow = 1
+  let firstItemRow = 2
+  let itemFirstRow = priceS.getRange(firstItemRow,itemFirstColumn+1)
+  if (!itemFirstRow.getDisplayValue()) {
+    firstItemRow = itemFirstRow.getNextDataCell(SpreadsheetApp.Direction.DOWN).getRowIndex()
+  }
 
   let chart = itemsS.newChart()
     .asComboChart()
