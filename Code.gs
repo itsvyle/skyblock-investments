@@ -241,7 +241,7 @@ function createPriceChartForHoveredItem() {
       },
       1: {
         title:'volume',
-        textStyle: {color: 'black'}
+        textStyle: {color: 'black',fontSize: 6}
       }
     })
     .setOption("series",{
