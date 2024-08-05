@@ -2,6 +2,7 @@ function onOpen(e) {
   SpreadsheetApp.getUi()
       .createAddonMenu()
       .addItem('Reload Item Prices', 'reloadPrices')
+      .addItem("Generate price graph for this item","createPriceChartForHoveredItem")
       .addToUi();
 }
 
@@ -179,6 +180,83 @@ function listItems() {
     }
   }
   return r
+}
+
+function createPriceChartForHoveredItem() {
+  let ss = SpreadsheetApp.getActiveSpreadsheet()
+  let itemsS = ss.getSheetByName("items")
+  if (!itemsS) {
+    throw "Error: couldn't find 'items' sheet"
+  }
+  let priceS = ss.getSheetByName("price_history")
+  if (!priceS) {
+    throw "Error: couldn't find 'price_history' sheet"
+  }
+  let homeS = ss.getSheetByName("home")
+  if (!homeS) {
+    throw "Error: couldn't find 'home' sheet"
+  }
+
+  let selected = itemsS.getActiveCell()
+  if (!selected) throw "No selected cell"
+  
+  const item_name = itemsS.getRange(selected.getRowIndex(),2).getDisplayValue()
+  if (!item_name) throw "No item name found on this row"
+
+  let maxColumns = priceS.getDataRange().getNumColumns()
+  let firstRow = priceS.getRange(1,1,1,maxColumns).getValues()[0]
+  while(firstRow.length<pricesColumnFirstData-1) firstRow.push("")
+
+  let itemFirstColumn = -1
+  for(let i=pricesColumnFirstData;i<maxColumns;i+=pricesOneItemWidth) {
+    let item_id = firstRow[i].split(" ")[1]
+    if (item_id === item_name) {
+      itemFirstColumn = i
+      break;
+    }
+  }
+  itemFirstColumn-=1
+  if (itemFirstColumn < 0) {
+    throw "Couldn't find item with name " + item_name;
+  }
+  
+  let firstItemRow = 1
+
+  let chart = itemsS.newChart()
+    .asComboChart()
+    .setTitle(`${item_name} price over time`)
+    .setChartType(Charts.ChartType.COMBO)
+    .addRange(priceS.getRange(`A${firstItemRow}:A`))
+    .addRange(priceS.getRange(`${numberToColumn(itemFirstColumn+3)}${firstItemRow}:${numberToColumn(itemFirstColumn+3)}`))
+    .addRange(priceS.getRange(`${numberToColumn(itemFirstColumn+2)}${firstItemRow}:${numberToColumn(itemFirstColumn+2)}`))
+    .setPosition(5, 5, 0, 0)
+    .setOption("vAxes",{
+      0: {
+        title: "AVG AH Price",
+        textStyle: {color: 'black'}
+      },
+      1: {
+        title:'volume',
+        textStyle: {color: 'black'}
+      }
+    })
+    .setOption("series",{
+      0: {
+        labelInLegend: "volume",
+        areaOpacity: 0.5,
+        targetAxisIndex: 1,
+        color: "#008ecb",
+        dataOpacity: 0.1,
+        opacity: 0.1
+      },
+      1: {
+        labelInLegend: "AVG Price",
+        targetAxisIndex: 0
+      },
+    })
+    .build()
+
+  itemsS.insertChart(chart)
 }
 
 /**
